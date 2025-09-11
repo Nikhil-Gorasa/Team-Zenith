@@ -10,7 +10,7 @@ const MetricCard = ({ type, value, status, trend }) => {
       case 'temperature':
         return <Thermometer className="h-5 w-5 sm:h-6 sm:w-6" />;
       case 'tds':
-        return <Droplets className="h-5 w-5 sm:h-6 sm:w-6" />;
+  return <img src="/Bluefuture logo.png" alt="Team Zenith Logo" className="h-5 w-5 sm:h-6 sm:w-6" />;
       case 'turbidity':
         return <Eye className="h-5 w-5 sm:h-6 sm:w-6" />;
       case 'ph':

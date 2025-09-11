@@ -87,7 +87,7 @@ const Header = ({ onRefresh, isRefreshing, lastUpdated, selectedSensors, onSenso
           {/* Logo and Title */}
           <div className="flex items-center flex-1 min-w-0">
             <div className="flex-shrink-0 flex items-center">
-              <Droplets className="h-8 w-8 text-sky-400" />
+              <img src="/Bluefuture logo.png" alt="Team Zenith Logo" className="h-8 w-8" />
               <div className="ml-3 min-w-0">
                 <h1 className="text-sm sm:text-lg font-bold text-white truncate">
                   Smart Water Management Dashboard

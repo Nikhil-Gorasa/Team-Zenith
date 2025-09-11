@@ -404,6 +404,7 @@ const WaterTankPage = () => {
             </div>
             <div className="flex items-center">
               <Droplets className="h-8 w-8 text-blue-600 dark:text-blue-400 mr-3" />
+              <img src="/Bluefuture logo.png" alt="Team Zenith Logo" className="h-8 w-8 mr-3" />
               <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
                 {t('waterTanks.title')}
               </h1>
