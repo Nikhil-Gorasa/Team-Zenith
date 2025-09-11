@@ -13,7 +13,7 @@ const WaterQualityOverview = ({ data }) => {
       const ranges = {
         tds: { min: 0, max: 1000 },
         temperature: { min: 0, max: 50 },
-        turbidity: { min: 0, max: 20 },
+        turbidity: { min: 0, max: 15 },  // Updated max to better reflect typical range
         ph: { min: 0, max: 14 }
       };
       

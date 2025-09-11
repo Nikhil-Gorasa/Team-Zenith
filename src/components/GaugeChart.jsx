@@ -31,12 +31,12 @@ const getGaugeOption = (type, value, label, modal = false) => {
       ];
       break;
     case 'turbidity':
-      min = 0; max = 20; unit = 'NTU';
+      min = 0; max = 15; unit = 'NTU';
       color = [
-        [1/20, '#22c55e'],
-        [4/20, '#3b82f6'],
-        [10/20, '#f59e0b'],
-        [1, '#ef4444']
+        [1/15, '#22c55e'],    // Excellent: < 1 NTU
+        [4/15, '#3b82f6'],    // Good: 1-4 NTU
+        [10/15, '#f59e0b'],   // Warning: 4-10 NTU
+        [1, '#ef4444']        // Danger: > 10 NTU
       ];
       break;
     case 'ph':

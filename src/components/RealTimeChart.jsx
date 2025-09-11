@@ -28,7 +28,7 @@ const RealTimeChart = ({ data, type, title }) => {
       const ranges = {
         temperature: { min: -10, max: 50 },
         tds: { min: 0, max: 1200 },
-        turbidity: { min: 0, max: 25 },
+        turbidity: { min: 0, max: 15 },  // Updated to match other components
         ph: { min: 0, max: 14 }
       };
       return ranges[type] || { min: 0, max: 100 };

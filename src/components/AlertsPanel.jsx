@@ -52,22 +52,23 @@ const AlertsPanel = ({ data }) => {
       });
     }
 
-    // Turbidity alerts
-    if (data.Turbidity > 10) {
+    // Turbidity alerts (scaled by 0.01)
+    const scaledTurbidity = data.Turbidity * 0.01;
+    if (scaledTurbidity > 10) {
       alertList.push({
-        id: 'turbidity-high',
+        id: 'turbidity-danger',
         type: 'danger',
         message: t('alerts.highTurbidity'),
-        value: data.Turbidity,
+        value: scaledTurbidity,
         unit: 'NTU',
         timestamp: new Date()
       });
-    } else if (data.Turbidity > 4) {
+    } else if (scaledTurbidity >= 4 && scaledTurbidity <= 10) {
       alertList.push({
         id: 'turbidity-warning',
         type: 'warning',
         message: t('alerts.highTurbidity'),
-        value: data.Turbidity,
+        value: scaledTurbidity,
         unit: 'NTU',
         timestamp: new Date()
       });
@@ -100,13 +101,13 @@ const AlertsPanel = ({ data }) => {
   const getAlertIcon = (type) => {
     switch (type) {
       case 'danger':
-        return <XCircle className="h-5 w-5 text-red-500" />;
+        return <XCircle className="w-5 h-5 text-red-500" />;
       case 'warning':
-        return <AlertTriangle className="h-5 w-5 text-yellow-500" />;
+        return <AlertTriangle className="w-5 h-5 text-yellow-500" />;
       case 'info':
-        return <AlertCircle className="h-5 w-5 text-blue-500" />;
+        return <AlertCircle className="w-5 h-5 text-blue-500" />;
       default:
-        return <CheckCircle className="h-5 w-5 text-green-500" />;
+        return <CheckCircle className="w-5 h-5 text-green-500" />;
     }
   };
 
@@ -143,7 +144,7 @@ const AlertsPanel = ({ data }) => {
         {alerts.length === 0 ? (
           <div className="flex items-center justify-center py-8">
             <div className="text-center">
-              <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-3" />
+              <CheckCircle className="w-12 h-12 mx-auto mb-3 text-green-500" />
               <p className="text-gray-600">{t('alerts.noAlerts')}</p>
             </div>
           </div>
@@ -157,11 +158,11 @@ const AlertsPanel = ({ data }) => {
                 <div className="flex-shrink-0">
                   {getAlertIcon(alert.type)}
                 </div>
-                <div className="ml-3 flex-1">
+                <div className="flex-1 ml-3">
                   <p className="text-sm font-medium text-gray-900">
                     {alert.message}
                   </p>
-                  <div className="mt-1 flex items-center justify-between">
+                  <div className="flex items-center justify-between mt-1">
                     <p className="text-sm text-gray-600">
                       {t(`status.${alert.type}`)} - {alert.value} {alert.unit}
                     </p>

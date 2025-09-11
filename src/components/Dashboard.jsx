@@ -21,6 +21,9 @@ const Dashboard = () => {
     turbidity: [],
     ph: []
   });
+
+  // Scale turbidity value
+  const scaleTurbidity = (value) => value * 0.01;
   const [isLoading, setIsLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -63,7 +66,7 @@ const Dashboard = () => {
         setHistoricalData(prev => ({
           temperature: [...prev.temperature, { timestamp, value: data.Temperature }].slice(-20),
           tds: [...prev.tds, { timestamp, value: data.TDS }].slice(-20),
-          turbidity: [...prev.turbidity, { timestamp, value: data.Turbidity }].slice(-20),
+          turbidity: [...prev.turbidity, { timestamp, value: scaleTurbidity(data.Turbidity) }].slice(-20),
           ph: [...prev.ph, { timestamp, value: data.pH }].slice(-20)
         }));
       }
@@ -112,8 +115,8 @@ const Dashboard = () => {
       },
       {
         type: 'turbidity',
-        value: sensorData.Turbidity,
-        status: getMetricStatus('Turbidity', sensorData.Turbidity)
+        value: scaleTurbidity(sensorData.Turbidity),
+        status: getMetricStatus('Turbidity', scaleTurbidity(sensorData.Turbidity))
       },
       {
         type: 'ph',
@@ -177,7 +180,7 @@ const Dashboard = () => {
       const report = await getGeminiWaterReport({
         TDS: sensorData.TDS,
         Temperature: sensorData.Temperature,
-        Turbidity: sensorData.Turbidity,
+        Turbidity: scaleTurbidity(sensorData.Turbidity),
         pH: sensorData.pH
       });
       setGeminiReport(report);
@@ -350,7 +353,7 @@ const Dashboard = () => {
               <GaugeChart type="temperature" value={sensorData.Temperature} label="Temperature" onClick={() => setExpandedGauge('temperature')} />
             )}
             {selectedSensors.includes('turbidity') && (
-              <GaugeChart type="turbidity" value={sensorData.Turbidity} label="Turbidity" onClick={() => setExpandedGauge('turbidity')} />
+              <GaugeChart type="turbidity" value={scaleTurbidity(sensorData.Turbidity)} label="Turbidity" onClick={() => setExpandedGauge('turbidity')} />
             )}
             {selectedSensors.includes('ph') && (
               <GaugeChart type="ph" value={sensorData.pH} label="pH Level" onClick={() => setExpandedGauge('ph')} />
@@ -369,7 +372,7 @@ const Dashboard = () => {
                     value={
                       expandedGauge === 'tds' ? sensorData.TDS :
                       expandedGauge === 'temperature' ? sensorData.Temperature :
-                      expandedGauge === 'turbidity' ? sensorData.Turbidity :
+                      expandedGauge === 'turbidity' ? scaleTurbidity(sensorData.Turbidity) :
                       expandedGauge === 'ph' ? sensorData.pH : 0
                     }
                     label={
