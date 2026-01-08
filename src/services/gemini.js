@@ -1,5 +1,5 @@
 // Gemini API integration for water quality analysis
-const GEMINI_API_KEY = 'AIzaSyCWViuENMXrenrteZ8wHtNcwN2Bfi_vmI0';
+const GEMINI_API_KEY = 'AIzaSyBJPttfOHKvtQX0WGtwo8Nhvsg2z9EKxyA';
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1/models/gemini-2.0-flash:generateContent?key=' + GEMINI_API_KEY;
 
 /**
